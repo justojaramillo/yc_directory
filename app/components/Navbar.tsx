@@ -3,6 +3,8 @@ import Link from "next/link";
 import React from "react";
 import { auth, signOut, signIn } from "@/auth";
 
+//1:25:07
+
 const Navbar = async () => {
   const session = await auth();
   return (
@@ -23,7 +25,7 @@ const Navbar = async () => {
                   await signOut({ redirectTo: "/" });
                 }}
               >
-                <button type="submit">Signout</button>
+                <button type="submit">SignOut</button>
               </form>
               <Link href={`/user/${session?.user?.id}`}>
                 <span>{session?.user?.name}</span>
@@ -36,7 +38,7 @@ const Navbar = async () => {
                 await signIn("github");
               }}
             >
-              <button type="submit">Signin</button>
+              <button type="submit">SignIn</button>
             </form>
           )}
         </div>
