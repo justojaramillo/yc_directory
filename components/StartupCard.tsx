@@ -64,6 +64,7 @@ const StartupCard = ({ post }: { post: StartuTypeCard }) => {
       </div>
     </li>
     /* 2:12:42 */
+    
   );
 };
 
