@@ -14,7 +14,6 @@ const SearchFormReset = () => {
         <X className="size-8" />
       </Link>
     </button>
-    /* 1:53:11 */
   );
 };
 

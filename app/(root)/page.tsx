@@ -1,48 +1,26 @@
 import Image from "next/image";
 import SearchForm from "@/components/SearchForm";
-import StartupCard from "@/components/StartupCard";
+import StartupCard, { StartupTypeCard } from "@/components/StartupCard";
+import { client } from "@/sanity/lib/client";
+import { STARTUPS_QUERY } from "@/lib/queries";
 
-export default async function Home({
-  searchParams,
-}: {
-  searchParams: Promise<{ query?: string }>;
-}) {
+export default async function Home({ searchParams }: { searchParams: Promise<{ query?: string }> }) {
   const query = (await searchParams).query;
-  const posts = [
-    {
-      _id: 1,
-      _createdAt: new Date(),
-      views: 55,
-      author: { _id: 1, name: "Adrian" },
-      title: "We Robots",
-      category: "Robots",
-      description: "This is a description",
-      image:
-        "https://www.imec-int.com/_next/image?url=https%3A%2F%2Fdrupal.imec-int.com%2Fsites%2Fdefault%2Ffiles%2F2022-01%2Frobot.jpg&w=3840&q=75",
-    },
-  ];
+  const posts = await client.fetch(STARTUPS_QUERY);
+
   return (
     <>
       <section className="pink_container">
         <h1 className="heading">
           Pitch Your Startup, <br /> Connect with entrepreneurs{" "}
         </h1>
-        <p className="sub-heading !max-w-3xl">
-          Submit Ideas, Vote on Pitches, and Get Noticed in Vitrual
-          Competitions.
-        </p>
+        <p className="sub-heading !max-w-3xl">Submit Ideas, Vote on Pitches, and Get Noticed in Vitrual Competitions.</p>
         <SearchForm query={query} />
       </section>
       <section className="section_container">
-        <p className="text-30-semibold">
-          {query ? `Search results for "${query}"` : "All Startups"}
-        </p>
+        <p className="text-30-semibold">{query ? `Search results for "${query}"` : "All Startups"}</p>
         <ul className="mt-7 card_grid">
-          {posts?.length > 0 ? (
-            posts.map((post) => <StartupCard key={post?._id} post={post} />)
-          ) : (
-            <p>No startups results</p>
-          )}
+          {posts?.length > 0 ? posts.map((post: StartupTypeCard) => <StartupCard key={post?._id} post={post} />) : <p>No startups results</p>}
         </ul>
       </section>
     </>

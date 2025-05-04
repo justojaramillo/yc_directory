@@ -1,3 +1,4 @@
 {
-  "editor.wordWrapColumn": 130
+  "editor.wordWrapColumn": 150,
+  "html.format.wrapLineLength": 150
 }

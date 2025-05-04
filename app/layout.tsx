@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import localFont from "next/font/local";
 import "./globals.css";
+import "easymde/dist/easymde.min.css";
 
 const workSans = localFont({
   src: [
@@ -22,12 +23,11 @@ export const metadata: Metadata = {
   description: "Pitch, Vote and Grow",
 };
 
-export default function RootLayout({
-  children,
-}: Readonly<{ children: React.ReactNode }>) {
+export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
   return (
     <html lang="en">
       <body className={`${workSans.variable} antialiased`}>{children}</body>
     </html>
   );
 }
+/* 2:42:10 */
